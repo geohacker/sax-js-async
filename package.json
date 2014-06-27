@@ -1,0 +1,22 @@
+{
+  "name": "sax-async",
+  "version": "0.0.1",
+  "description": "Wrapper around sax-js to allow for asynchronous event handlers, and using streams2 to properly exert backpressure on piped streams",
+  "keywords": [
+    "sax",
+    "xml",
+    "async"
+  ],
+  "license": "BSD-2-Clause",
+  "author": "Chris Breneman <crispy@cluenet.org>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/crispy1989/sax-js-async.git"
+  },
+  "main": "./sax-js-async.js",
+  "dependencies": {
+    "async": "crispy1989/async.git",
+    "crisphooks": "0.0.1",
+    "sax": "^0.6.0"
+  }
+}
