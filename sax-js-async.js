@@ -65,7 +65,14 @@ SaxStream2.prototype._write = function(chunk, encoding, cb) {
 	this._parser.write(chunk.toString('utf8'));
 
 	// Process event queue
-	this._processEventQueue(cb);
+	var self = this;
+	this._processEventQueue(function(error) {
+		if(error) {
+			// workaround node.js bug that crashes node if _write() calls cb with an error when being pipe()'d to
+			self.emit('error', error);
+		}
+		cb();
+	});
 };
 
 SaxStream2.prototype.end = function(chunk, encoding, callback) {
