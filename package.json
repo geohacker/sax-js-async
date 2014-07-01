@@ -1,6 +1,6 @@
 {
   "name": "sax-async",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Wrapper around sax-js to allow for asynchronous event handlers, and using streams2 to properly exert backpressure on piped streams",
   "keywords": [
     "sax",
