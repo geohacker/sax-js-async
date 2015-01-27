@@ -1,12 +1,12 @@
 var sax = require('sax');
 var CrispHooks = require('crisphooks');
-var Writable = require('stream').Writable;
+var Transform = require('stream').Transform;
 var util = require('util');
 var async = require('async');
 
-function SaxStream2(strict, options, streamOptions) {
+function SaxStream2(strict, options, streamOptions, fn) {
 	if(!options) options = {};
-	Writable.call(this, streamOptions);
+	Transform.call(this, streamOptions);
 
 	this.parallelHandlers = options.parallel;
 
@@ -33,8 +33,9 @@ function SaxStream2(strict, options, streamOptions) {
 			});
 		};
 	});
+	this.fn = fn;
 }
-util.inherits(SaxStream2, Writable);
+util.inherits(SaxStream2, Transform);
 
 SaxStream2.prototype._processEventQueue = function(cb) {
 	var self = this;
@@ -68,17 +69,14 @@ SaxStream2.prototype._write = function(chunk, encoding, cb) {
 	this._processEventQueue(cb);
 };
 
-SaxStream2.prototype.end = function(chunk, encoding, callback) {
+SaxStream2.prototype._flush = function(callback) {
 	var self = this;
 	this._parser.close();
-	Writable.prototype.end.call(this, chunk, encoding, function() {
-		self._processEventQueue(function(error) {
-			if(error) {
-				self.emit('error', error);
-			} else {
-				if(callback) callback();
-			}
-		});
+	self._processEventQueue(function(error) {
+		if(error) {
+			self.emit('error', error);
+		}
+		if(callback) callback();
 	});
 };
 
