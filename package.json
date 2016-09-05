@@ -15,7 +15,7 @@
   },
   "main": "./sax-js-async.js",
   "dependencies": {
-    "async": "crispy1989/async.git",
+    "async": "1.5.2",
     "crisphooks": "0.0.1",
     "sax": "1.2.1"
   }
