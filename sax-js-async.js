@@ -49,7 +49,9 @@ SaxStream2.prototype._processEventQueue = function(cb) {
 				if(error) {
 					cb(error);
 				} else {
-					cb(null);
+					async.setImmediate(function () {
+						cb(null);
+					});
 				}
 			}]));
 		}
