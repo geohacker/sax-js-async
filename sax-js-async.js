@@ -41,7 +41,7 @@ SaxStream2.prototype._processEventQueue = function(cb) {
 	var self = this;
 
 	// Asynchronously fire off all the hooks
-	async[this.parallelHandlers ? 'safeEach' : 'safeEachSeries'](this._eventQueue, function(eventSpec, cb) {
+	async['eachSeries'](this._eventQueue, function(eventSpec, cb) {
 		if(eventSpec.name == 'error') {
 			cb(eventSpec.args[0]);
 		} else {
