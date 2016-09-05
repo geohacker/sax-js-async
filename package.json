@@ -17,6 +17,6 @@
   "dependencies": {
     "async": "crispy1989/async.git",
     "crisphooks": "0.0.1",
-    "sax": "^0.6.0"
+    "sax": "0.6.0"
   }
 }
